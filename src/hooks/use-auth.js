@@ -1,9 +1,11 @@
 // src/hooks/useAuth.js
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { loginApi, logoutApi, checkAuthApi } from "@/api/authApi";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   // ✅ Load initial auth state
   const { data, isLoading } = useQuery({
@@ -25,6 +27,7 @@ export const useAuth = () => {
     mutationFn: logoutApi,
     onSuccess: () => {
       queryClient.setQueryData(["auth"], { isAuthenticated: false });
+      navigate("/login", { replace: true });
     },
   });
 

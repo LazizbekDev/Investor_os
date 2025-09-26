@@ -1,10 +1,12 @@
 import { Bell, Search, ChevronDown, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useNotifications } from "../../hooks/use-notifications";
 
 
 export function TopBar({ onOpenCommandPalette, onToggleSidebar }) {
   const navigate = useNavigate();
+  const { notifications, isLoading } = useNotifications();
   return (
     <header className="glass-nav h-14 flex items-center justify-between px-4 md:px-6">
       {/* Mobile Menu & Title */}
@@ -12,7 +14,7 @@ export function TopBar({ onOpenCommandPalette, onToggleSidebar }) {
         {/* Mobile Menu Button */}
         <Button
           variant="ghost"
-          size="sm" 
+          size="sm"
           className="md:hidden"
           onClick={onToggleSidebar}
         >
@@ -61,9 +63,12 @@ export function TopBar({ onOpenCommandPalette, onToggleSidebar }) {
         {/* Notifications */}
         <Button variant="ghost" size="sm" className="relative" onClick={() => navigate('/notifications')}>
           <Bell className="h-4 w-4" />
-          <span className="absolute -top-1 -right-1 h-3 w-3 bg-warning rounded-full text-[10px] font-medium flex items-center justify-center text-warning-foreground">
-            3
-          </span>
+          {!isLoading && notifications.length > 0 && (
+            <span className="absolute -top-1 -right-1 h-3 w-3 bg-warning rounded-full text-[10px] font-medium flex items-center justify-center text-warning-foreground">
+              {notifications.length}
+            </span>
+          )}
+
         </Button>
 
         {/* Profile */}
