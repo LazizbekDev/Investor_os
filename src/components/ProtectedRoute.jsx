@@ -1,16 +1,29 @@
-import { Navigate } from "react-router-dom";
-import { useAuth } from "@/context/AuthContext";
+import { Navigate, Outlet } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export default function ProtectedRoute({ children }) {
-    const { isAuthenticated, isLoading } = useAuth();
-    console.log("ProtectedRoute - isAuthenticated:", isAuthenticated);
+const fetchAuth = async () => {
+  const saved = localStorage.getItem("isAuthenticated");
+  return saved === "true";
+};
 
-    if (isLoading) {
-        return <div className="flex items-center justify-center h-screen">Loading...</div>;
-    }
+export default function ProtectedRoute() {
+  const { data: isAuthenticated, isLoading } = useQuery({
+    queryKey: ["auth"],
+    queryFn: fetchAuth,
+    staleTime: Infinity, // auth status localStorage’dan o‘zgarmaguncha valid
+  });
 
-    if (!isAuthenticated) {
-        return <Navigate to="/login" replace />;
-    }
-    return children;
+  if (isLoading) {
+    return (
+      <div className="p-8 text-center text-muted-foreground">
+        Checking authentication...
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 }

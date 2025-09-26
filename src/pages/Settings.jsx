@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/use-auth";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
