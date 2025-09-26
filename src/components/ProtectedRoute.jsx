@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchAuth = async () => {
@@ -6,7 +6,7 @@ const fetchAuth = async () => {
   return saved === "true";
 };
 
-export default function ProtectedRoute() {
+export default function ProtectedRoute({ children }) {
   const { data: isAuthenticated, isLoading } = useQuery({
     queryKey: ["auth"],
     queryFn: fetchAuth,
@@ -25,5 +25,5 @@ export default function ProtectedRoute() {
     return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />;
+  return children;
 }
