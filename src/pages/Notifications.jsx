@@ -14,12 +14,14 @@ export default function Notifications() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-[#7F5AF0]">Notifications</h1>
-        <Button
-          className="bg-[#2CB67D] hover:bg-[#259a67] text-white px-4 py-2 rounded-md"
-          onClick={() => markAllAsRead()}
-        >
-          Mark All as Read
-        </Button>
+        {notifications.length !== 0 && (
+          <Button
+            className="bg-[#2CB67D] hover:bg-[#259a67] text-white px-4 py-2 rounded-md"
+            onClick={() => markAllAsRead()}
+          >
+            Mark All as Read
+          </Button>
+        )}
       </div>
 
       {/* Notifications List */}
@@ -27,19 +29,17 @@ export default function Notifications() {
         {notifications.map((note) => (
           <Card
             key={note.id}
-            className={`backdrop-blur-lg border ${
-              note.isRead
+            className={`backdrop-blur-lg border ${note.isRead
                 ? "border-border hover:border-foreground text-muted-foreground bg-[#1a1a1a]/20"
                 : "border-[#7F5AF0]/30 hover:border-[#7F5AF0]"
-            } transition-colors`}
+              } transition-colors`}
           >
             <CardContent className="p-4 flex items-start justify-between">
               <div>
                 <p className="text-sm text-gray-300">{note.text}</p>
                 <span
-                  className={`text-xs ${
-                    note.isRead ? "text-secondary-foreground" : "text-[#FFCD58]"
-                  }`}
+                  className={`text-xs ${note.isRead ? "text-secondary-foreground" : "text-[#FFCD58]"
+                    }`}
                 >
                   {note.time}
                 </span>
@@ -47,11 +47,10 @@ export default function Notifications() {
               <Button
                 size="sm"
                 onClick={() => dismiss(note.id)}
-                className={`${
-                  note.isRead
+                className={`${note.isRead
                     ? "bg-secondary hover:bg-secondary-foreground"
                     : "bg-[#7F5AF0] hover:bg-[#6b47d6]"
-                } text-white px-3 py-1 rounded-md`}
+                  } text-white px-3 py-1 rounded-md`}
               >
                 Dismiss
               </Button>
@@ -59,7 +58,7 @@ export default function Notifications() {
           </Card>
         ))}
         {notifications.length === 0 && (
-          <li className="text-gray-500 text-center text-sm">No notifications</li>
+          <li className="text-gray-500 text-center text-sm list-none">No notifications</li>
         )}
       </div>
     </div>

@@ -9,9 +9,12 @@ import Pipeline from "@/pages/Pipeline";
 import NotFound from "@/pages/NotFound";
 import Settings from "@/pages/Settings";
 import Login from "@/pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Profile from "./pages/Profile";
-import Notifications from "./pages/Notifications";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import Profile from "@/pages/Profile";
+import Notifications from "@/pages/Notifications";
+import Diligence from "@/pages/Diligence";
+import Portfolio from "./pages/Portfolio";
+import Network from "./pages/Network";
 
 const queryClient = new QueryClient();
 
@@ -29,9 +32,9 @@ const App = () => (
           </ProtectedRoute>}>
             <Route index element={<MorningBrief />} />
             <Route path="pipeline" element={<Pipeline />} />
-            <Route path="diligence" element={<div className="p-8 text-center text-muted-foreground">Diligence page coming soon...</div>} />
-            <Route path="portfolio" element={<div className="p-8 text-center text-muted-foreground">Portfolio page coming soon...</div>} />
-            <Route path="network" element={<div className="p-8 text-center text-muted-foreground">Network page coming soon...</div>} />
+            <Route path="diligence" element={<Diligence/>} />
+            <Route path="portfolio" element={<Portfolio />} />
+            <Route path="network" element={<Network />} />
             <Route path="inbox" element={<div className="p-8 text-center text-muted-foreground">Inbox & Library page coming soon...</div>} />
             <Route path="analytics" element={<div className="p-8 text-center text-muted-foreground">Analytics page coming soon...</div>} />
             <Route path="profile" element={<Profile />} />

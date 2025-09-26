@@ -2,11 +2,24 @@ import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 import { CommandPalette } from "./CommandPalette";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function AppLayout() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const down = (e) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setCommandPaletteOpen(false);
+        setTimeout(() => setCommandPaletteOpen(true), 100); // Toggle behavior
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [commandPaletteOpen]);
 
   return (
     <div className="min-h-screen w-full bg-background font-inter">
