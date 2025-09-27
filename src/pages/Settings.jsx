@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "../hooks/use-auth";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -15,8 +14,6 @@ export default function Settings() {
     alerts: false,
     weekly: true
   });
-
-  const {logout} = useAuth();
 
   const settingsSections = [
     {
@@ -223,7 +220,7 @@ export default function Settings() {
                 <Separator className="bg-border/50" />
                 
                 <div className="p-4">
-                  <Button variant="outline" size="sm" onClick={() => logout()} className="w-full justify-start gap-2 text-destructive border-destructive/20 hover:bg-destructive/10">
+                  <Button variant="outline" size="sm" className="w-full justify-start gap-2 text-destructive border-destructive/20 hover:bg-destructive/10">
                     <LogOut className="h-4 w-4" />
                     Sign Out
                   </Button>
@@ -240,4 +237,4 @@ export default function Settings() {
       </div>
     </div>
   );
-};
+}

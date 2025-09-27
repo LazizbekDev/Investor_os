@@ -7,7 +7,6 @@ import {
   Network,
   Inbox,
   Settings,
-  TrendingUp
 } from "lucide-react";
 
 const navigation = [
@@ -20,7 +19,6 @@ const navigation = [
 ];
 
 const secondaryNavigation = [
-  { name: "Analytics", href: "/analytics", icon: TrendingUp },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 

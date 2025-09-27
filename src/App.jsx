@@ -15,6 +15,7 @@ import Notifications from "@/pages/Notifications";
 import Diligence from "@/pages/Diligence";
 import Portfolio from "./pages/Portfolio";
 import Network from "./pages/Network";
+import InboxLibrary from "./pages/InboxLibrary";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +36,7 @@ const App = () => (
             <Route path="diligence" element={<Diligence/>} />
             <Route path="portfolio" element={<Portfolio />} />
             <Route path="network" element={<Network />} />
-            <Route path="inbox" element={<div className="p-8 text-center text-muted-foreground">Inbox & Library page coming soon...</div>} />
+            <Route path="inbox" element={<InboxLibrary />} />
             <Route path="analytics" element={<div className="p-8 text-center text-muted-foreground">Analytics page coming soon...</div>} />
             <Route path="profile" element={<Profile />} />
             <Route path="notifications" element={<Notifications />} />
