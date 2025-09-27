@@ -67,9 +67,9 @@ export default function Pipeline() {
         sector: deal.company.sector || "Other",
         lastUpdate: deal.updatedAt
           ? new Date(deal.updatedAt).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit"
-            })
+            hour: "2-digit",
+            minute: "2-digit"
+          })
           : "Just now",
         description: deal.description || "No description available",
         comments: deal.comments || []
@@ -166,11 +166,12 @@ export default function Pipeline() {
   const handleDealAction = (dealId, action) => {
     const newStage =
       action === "accept"
-        ? "IC Ready"
+        ? "Screening"
         : action === "reject"
-        ? "Decided"
-        : "Diligence";
+          ? "Decided"
+          : "Diligence";
     const apiStage = apiStages[stages.indexOf(newStage)];
+    console.log(action, newStage, apiStage);
     transitionDealMutation.mutate({ id: dealId, to: apiStage });
   };
 
